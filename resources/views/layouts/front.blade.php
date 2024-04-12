@@ -20,18 +20,20 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap"
+        rel="stylesheet">
     @stack("css")
 </head>
 <body>
 
-@include('front/include/top-bar')
+@include('layouts.front.top-bar')
 
-@include('front/include/header')
+@include('layouts.front.header')
 
 @yield("body")
 
-@include('front/include/footer')
+@include('layouts.front.footer')
 
 <script src="{{ asset('assets/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery/dist/jquery.min.js') }}"></script>
