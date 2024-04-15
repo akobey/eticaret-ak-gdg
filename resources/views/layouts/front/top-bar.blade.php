@@ -2,8 +2,8 @@
     <div class="container">
         <div class="login float-end ">
             <ul class="login-list">
-                <li><a href="" class="text-white">GİRİŞ</a></li>
-                <li><a href="" class="text-white">KAYIT</a></li>
+                <li><a href="{{ route('login') }}" class="text-white">GİRİŞ</a></li>
+                <li><a href="{{ route('register') }}" class="text-white">KAYIT</a></li>
                 <li><a href="" class="text-white">SİPARİŞLERİM</a></li>
                 <li><a href="" class="text-white">SEPETİM</a></li>
                 <li class="dropdown user-basket position-relative">
