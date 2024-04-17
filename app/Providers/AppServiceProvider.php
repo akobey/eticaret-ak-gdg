@@ -2,10 +2,19 @@
 
 namespace App\Providers;
 
+use App\Events\UserRegisterEvent;
+use App\Listeners\UserRegisterListener;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+
+    protected $listen = [
+        UserRegisterEvent::class => [
+            UserRegisterListener::class
+        ]
+    ];
+
     /**
      * Register any application services.
      */
