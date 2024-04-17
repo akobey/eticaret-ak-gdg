@@ -30,7 +30,7 @@ class RegisterController extends Controller
         $data = $request->only('name','email', 'password');
         $user = User::create($data);
 
-        event(new UserRegisterEvent($user));
+//        event(new UserRegisterEvent($user));
 
 //        dd("event çalıştı");
 
