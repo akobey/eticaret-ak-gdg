@@ -33,9 +33,9 @@ Route::post("/giris-yap", [LoginController::class, "login"]);
 
 
 
-Route::prefix("admin")->group(function (){
+Route::prefix("admin")->name('admin.')->middleware('auth')->group(function (){
 
-    Route::get("/", [DashboardController::class, 'index']);
+    Route::get("/", [DashboardController::class, 'index'])->name('index');
 
 });
 

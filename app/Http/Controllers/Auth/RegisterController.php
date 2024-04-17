@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Testing\Fluent\Concerns\Has;
@@ -30,6 +31,16 @@ class RegisterController extends Controller
         $data = $request->only('name','email', 'password');
         $user = User::create($data);
 
+//        $remember = $request->has('remember');
+//        Auth::login($user, $remember);
+
+
+        alert()->info('Bilgilendirme','Lütfen mailinize gelen onay mailini onaylayın.');
+        return redirect()->back();
+
+
+//        return redirect()->route('admin.index');
+
 //        event(new UserRegisterEvent($user));
 
 //        dd("event çalıştı");
@@ -42,7 +53,8 @@ class RegisterController extends Controller
         $userID = Cache::get('verify_token_' . $request->token);
 
         if(!$userID){
-            dd("user yok");
+            alert()->warning('Uyarı','Token geçerlilik süresi doldu.');
+            return redirect()->route('register');
         }
 
         $user = User::findOrFail($userID);
@@ -51,7 +63,10 @@ class RegisterController extends Controller
 
         Cache::forget('verify_token_' . $request->token);
 
-        dd("User doğrulandı");
+        Auth::login($user);
+        alert()->success('Başarılı','Hesabınız onaylandı');
+
+        return redirect()->route('admin.index');
     }
 
 
