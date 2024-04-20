@@ -52,20 +52,27 @@ class RegisterController extends Controller
     {
         $userID = Cache::get('verify_token_' . $request->token);
 
-        if(!$userID){
-            alert()->warning('Uyarı','Token geçerlilik süresi doldu.');
+        if (!$userID)
+        {
+            alert()->warning('Uyarı','Tokenın geçerlilik süresi dolmuş');
             return redirect()->route('register');
         }
 
-        $user = User::findOrFail($userID);
-        $user->email_verified_at = now();
-        $user->save();
+//        $user = User::findOrFail($userID);
+//        $user->email_verified_at = now();
+//        $user->save();
 
-        Cache::forget('verify_token_' . $request->token);
+        $userQuery = User::query()
+            ->where('id', $userID);
+
+        $user = $userQuery->firstOrFail();
+
+        $userQuery->update(['email_verified_at' => now()]);
+
+//        Cache::forget('verify_token_' . $request->token);
 
         Auth::login($user);
-        alert()->success('Başarılı','Hesabınız onaylandı');
-
+        alert()->success('Başarılı','Hesabınız onaylandı.');
         return redirect()->route('admin.index');
     }
 

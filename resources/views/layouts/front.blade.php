@@ -29,7 +29,7 @@
 
 @include('layouts.front.top-bar')
 
-@include('layouts.front.header')
+@include('layouts.front.navbar')
 
 @yield("body")
 
